@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 const PrivetRoute = ({ children }) => {
   const { user, loading } = useAuth();
   const location = useLocation();
+  console.log(location.pathname);
 
   if (loading) {
     return <span className="loading loading-bars loading-lg"></span>;
@@ -14,7 +15,7 @@ const PrivetRoute = ({ children }) => {
     return children;
   }
 
-  return <Navigate to="/login"></Navigate>;
+  return <Navigate state={location.pathname} to="/login"></Navigate>;
 };
 
 PrivetRoute.propTypes = {

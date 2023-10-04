@@ -1,9 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../Sheard/Navbar/Navbar";
 import useAuth from "../../utils/UseAuth/useAuth";
 
 const Login = () => {
   const { signInUser } = useAuth();
+
+  const location = useLocation();
+  console.log("login page location is:++>>>", location);
+
+  const navigate = useNavigate();
 
   const handleLogin = e => {
     e.preventDefault();
@@ -16,6 +21,9 @@ const Login = () => {
     signInUser(email, password)
       .then(result => {
         console.log(result.user);
+
+        // navigate after login
+        navigate(location?.state ? location.state : "/");
       })
       .catch(error => {
         console.log(error);
