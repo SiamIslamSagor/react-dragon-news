@@ -1,12 +1,27 @@
 import { Link } from "react-router-dom";
 import Navbar from "../Sheard/Navbar/Navbar";
+import useAuth from "../../utils/UseAuth/useAuth";
 
 const Register = () => {
+  const { createUser } = useAuth();
   const handleRegister = e => {
     e.preventDefault();
     console.log(e.currentTarget);
     const form = new FormData(e.currentTarget);
-    console.log(form.get("email"));
+    const name = form.get("name");
+    const photo = form.get("photo");
+    const email = form.get("email");
+    const password = form.get("password");
+    console.log(name, photo, email, password);
+
+    // crete user
+    createUser(email, password)
+      .then(result => {
+        console.log(result.user);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   return (
@@ -37,7 +52,6 @@ const Register = () => {
               placeholder="Photo URL"
               name="photo"
               className="input input-bordered"
-              required
             />
           </div>
           <div className="form-control">
