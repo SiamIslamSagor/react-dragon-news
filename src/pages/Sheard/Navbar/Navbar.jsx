@@ -1,16 +1,19 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import userPicturePlaceholder from "../../../assets/user.png";
 const Navbar = () => {
   const navLinks = (
     <>
       <li>
-        <Link to="/">Home</Link>
+        <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <Link to="/">About</Link>
+        <NavLink to="/about">About</NavLink>
       </li>
       <li>
-        <Link to="/">Career</Link>
+        <NavLink to="/career">Career</NavLink>
+      </li>
+      <li>
+        <NavLink to="/login">Login</NavLink>
       </li>
     </>
   );
@@ -52,9 +55,9 @@ const Navbar = () => {
             <img src={userPicturePlaceholder} />
           </div>
         </label>
-        <Link>
+        <NavLink to="/login">
           <button className="btn">Login</button>
-        </Link>
+        </NavLink>
       </div>
     </div>
   );
