@@ -1,12 +1,25 @@
 import { Link } from "react-router-dom";
 import Navbar from "../Sheard/Navbar/Navbar";
+import useAuth from "../../utils/UseAuth/useAuth";
 
 const Login = () => {
+  const { signInUser } = useAuth();
+
   const handleLogin = e => {
     e.preventDefault();
     console.log(e.currentTarget);
     const form = new FormData(e.currentTarget);
-    console.log(form.get("email"));
+    const email = form.get("email");
+    const password = form.get("password");
+
+    //sign in user
+    signInUser(email, password)
+      .then(result => {
+        console.log(result.user);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   return (
@@ -46,7 +59,9 @@ const Login = () => {
             </label>
           </div>
           <div className="form-control mt-6">
-            <button className="btn btn-primary">Login</button>
+            <button onClick={signInUser} className="btn btn-primary">
+              Login
+            </button>
           </div>
         </form>
         <p className="text-center mt-4">
